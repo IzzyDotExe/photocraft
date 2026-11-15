@@ -133,6 +133,8 @@ pub mod notes_cmds;
 #[cfg(test)]
 mod notes_stored_values_tests;
 mod ops;
+pub mod pack;
+pub mod pack_cmds;
 pub mod paint_cmds;
 mod params;
 pub(super) mod path_edit_cmds;
@@ -1390,6 +1392,7 @@ fn build() -> Vec<CommandSpec> {
     v.extend(crate::extra_cmds::specs());
     v.extend(crate::background_cmds::specs());
     v.extend(crate::file_cmds::specs());
+    v.extend(crate::pack_cmds::specs());
     v.extend(crate::exr_cmds::specs());
     v.extend(crate::type_extra_cmds::specs());
     v.extend(crate::type_area_cmds::specs());

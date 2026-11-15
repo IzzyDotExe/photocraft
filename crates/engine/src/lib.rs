@@ -125,6 +125,8 @@ use cmd::migrate_cmds;
 pub use cmd::mode_cmds;
 pub use cmd::multichannel_cmds;
 pub use cmd::notes_cmds;
+pub use cmd::pack;
+pub use cmd::pack_cmds;
 pub use cmd::paint_cmds;
 use cmd::path_edit_cmds;
 pub use cmd::pattern_cmds;
@@ -267,6 +269,9 @@ pub struct Session {
     pub edit_state: edit_menu_cmds::EditState,
     /// The pattern library (Window › Patterns; see `pattern.*`).
     pub patterns: pattern_cmds::PatternLibrary,
+    /// The Minecraft texture pack workspace (see `pack_cmds`): the open pack folder, its
+    /// textures and which documents are its textures.
+    pub pack: pack::PackState,
     /// Image › Analysis: Measurement Log and Select Data Points (see `analysis_cmds`).
     pub analysis: analysis_cmds::AnalysisState,
     /// Window › Gradients, Patterns (groups), Styles, Shapes, Tool Presets and Clone Source.
