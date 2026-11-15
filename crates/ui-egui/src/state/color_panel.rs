@@ -15,6 +15,8 @@ pub struct DockTabs {
     pub character: usize,
     /// Brushes presets.
     pub brushes: usize,
+    /// Pack Explorer.
+    pub pack: usize,
 }
 
 /// Color panel state.

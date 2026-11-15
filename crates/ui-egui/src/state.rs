@@ -79,6 +79,9 @@ pub struct Panels {
     /// Window › Brushes: dockable panel, like Photoshop's.
     #[serde(default)]
     pub brushes: bool,
+    /// Window › Pack Explorer: the Minecraft texture pack workspace.
+    #[serde(default)]
+    pub pack: bool,
     /// Window › Character / Paragraph: the Character | Paragraph dock group (#150).
     #[serde(default)]
     pub character: bool,
@@ -120,6 +123,33 @@ pub struct Panels {
     pub task_bar: TaskBarPlace,
 }
 
+/// The Pack Explorer panel's own state: search filter, category filter and the New Texture form.
+#[derive(Clone, Debug, Default, PartialEq, Serialize, Deserialize)]
+pub struct PackPanelState {
+    /// Case-insensitive substring filter on the texture path.
+    #[serde(default)]
+    pub search: String,
+    /// The category filter (`None` shows every category).
+    #[serde(default)]
+    pub category: Option<String>,
+    /// The New Texture form is open.
+    #[serde(default)]
+    pub new_texture: bool,
+    /// The New Texture form's path field (`assets/<namespace>/textures/<category>/<name>.png`).
+    #[serde(default)]
+    pub new_path: String,
+    /// The New Texture form's width (a DragValue keeps it a float).
+    #[serde(default = "pack_default_side")]
+    pub new_width: f64,
+    /// The New Texture form's height (`new_width` until set).
+    #[serde(default = "pack_default_side")]
+    pub new_height: f64,
+}
+
+fn pack_default_side() -> f64 {
+    16.0
+}
+
 /// Where the contextual task bar sits (#10890). Part of [`Panels`], so it is kept with the panel
 /// layout across restarts, and `ui.set {panels: {task_bar: …}}` sets it.
 #[derive(Clone, Copy, Debug, Default, PartialEq, Serialize, Deserialize)]
@@ -146,6 +176,7 @@ impl Default for Panels {
             status_bar: true,
             brush_settings: false,
             brushes: false,
+            pack: false,
             character: false,
             toolbar_double: false,
             toolbar_side: ToolbarSide::Start,
@@ -552,6 +583,9 @@ pub struct UiState {
     /// Brushes panel: collapsed groups and the search filter.
     #[serde(default)]
     pub brushes_panel: crate::brush_panel::BrushesPanelState,
+    /// Pack Explorer: search filter, category filter and the New Texture form.
+    #[serde(default)]
+    pub pack_panel: PackPanelState,
     /// Marquee options-bar mode: 0 new, 1 add, 2 subtract, 3 intersect (modifier keys override).
     #[serde(default)]
     pub selection_mode: u8,
@@ -711,6 +745,7 @@ impl Default for UiState {
             brush_section: 0,
             brush_tab: 0,
             brushes_panel: Default::default(),
+            pack_panel: Default::default(),
             selection_mode: 0,
             tool_options: ToolOptions::default(),
             recent_gradients: Vec::new(),

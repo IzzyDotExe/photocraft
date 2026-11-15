@@ -209,6 +209,7 @@ pub(super) fn checked(app: &PhotocraftApp, id: &str) -> Option<bool> {
         "window.toggle.contextualTaskBar" => p.context_task_bar,
         "window.toggle.brushSettings" => p.brush_settings,
         "window.toggle.brushes" => p.brushes,
+        "window.toggle.pack" => p.pack,
         _ => return None,
     })
 }

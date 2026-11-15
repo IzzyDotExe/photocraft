@@ -795,6 +795,7 @@ pub static CATALOG: &[(&[&str], &str, Option<&str>, &str)] = &[
     (&["Window"], "Modifier Keys", None, "window.panel.modifierKeys"),
     (&["Window"], "Navigator", None, "window.panel.navigator"),
     (&["Window"], "Notes", None, "window.panel.notes"),
+    (&["Window"], "Pack Explorer", None, "window.panel.pack"),
     (&["Window"], "Paragraph", None, "window.panel.paragraph"),
     (&["Window"], "Paragraph Styles", None, "window.panel.paragraphStyles"),
     (&["Window"], "Paths", None, "window.panel.paths"),

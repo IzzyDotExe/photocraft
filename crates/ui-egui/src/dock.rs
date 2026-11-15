@@ -37,11 +37,13 @@ pub enum Group {
     Layers,
     /// Brushes presets.
     Brushes,
+    /// The Minecraft texture pack workspace (Pack Explorer).
+    Pack,
 }
 
 impl Group {
     /// Photoshop Essentials order, top to bottom.
-    pub const ALL: [Group; 7] = [Group::Color, Group::Properties, Group::Character, Group::Navigator, Group::History, Group::Layers, Group::Brushes];
+    pub const ALL: [Group; 8] = [Group::Color, Group::Properties, Group::Character, Group::Navigator, Group::History, Group::Layers, Group::Brushes, Group::Pack];
 
     pub fn key(self) -> &'static str {
         match self {
@@ -52,6 +54,7 @@ impl Group {
             Group::History => "history",
             Group::Layers => "layers",
             Group::Brushes => "brushes",
+            Group::Pack => "pack",
         }
     }
 
@@ -66,6 +69,7 @@ impl Group {
             Group::History => 200.0,
             Group::Layers => 320.0,
             Group::Brushes => 200.0,
+            Group::Pack => 220.0,
         }
     }
 
@@ -80,6 +84,7 @@ impl Group {
             Group::History => 130.0,
             Group::Layers => 200.0,
             Group::Brushes => 150.0,
+            Group::Pack => 160.0,
         }
     }
 
@@ -113,6 +118,7 @@ impl Group {
             Group::History => &["History", "Actions", "Layer Comps"],
             Group::Layers => &["Layers", "Channels", "Paths"],
             Group::Brushes => &["Brushes"],
+            Group::Pack => &["Pack Explorer"],
         }
     }
 
@@ -134,6 +140,7 @@ impl Group {
             Group::History => &mut tabs.history,
             Group::Layers => &mut tabs.layers,
             Group::Brushes => &mut tabs.brushes,
+            Group::Pack => &mut tabs.pack,
         }
     }
 
@@ -151,6 +158,7 @@ impl Group {
             Group::History => panels.history,
             Group::Layers => panels.layers,
             Group::Brushes => panels.brushes,
+            Group::Pack => panels.pack,
         }
     }
 
@@ -163,6 +171,7 @@ impl Group {
             Group::History => &mut panels.history,
             Group::Layers => &mut panels.layers,
             Group::Brushes => &mut panels.brushes,
+            Group::Pack => &mut panels.pack,
         }
     }
 }

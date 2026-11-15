@@ -41,6 +41,7 @@ const PANELS: &[(&str, &str, Group)] = &[
     ("channels", "Channels", Group::Layers),
     ("paths", "Paths", Group::Layers),
     ("brushes", "Brushes", Group::Brushes),
+    ("pack", "Pack Explorer", Group::Pack),
 ];
 
 /// PhotoCraft's wording of craft-ui's docking labels, translated through `tl!`. The others keep
@@ -526,7 +527,7 @@ pub(crate) fn command(app: &mut PhotocraftApp, id: &str, params: &Value) -> Opti
         return Some(group_command(app, params));
     }
     if let Some(panel) = id.strip_prefix("window.panel.").or_else(|| id.strip_prefix("window.toggle.")).and_then(normalize) {
-        if app.ui.docking.is_none() && panel != "brushes" {
+        if app.ui.docking.is_none() && panel != "brushes" && panel != "pack" {
             return None;
         }
         let layout = app.ui.docking.as_ref().map(|workspace| &workspace.layout);
@@ -1488,6 +1489,7 @@ pub(crate) fn prepare_legacy_update(
                 Group::History => tabs.history,
                 Group::Layers => tabs.layers,
                 Group::Brushes => tabs.brushes,
+                Group::Pack => tabs.pack,
             };
             let id = group.tabs(pro).get(index).and_then(|label| normalize(label)).ok_or("dockTabs index is outside the panel group")?;
             if visibility == Some(false) {
